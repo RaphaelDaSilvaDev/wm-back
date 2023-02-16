@@ -4,5 +4,6 @@ export interface ICreateUser {
   username: string;
   password: string;
   permission: string;
+  status?: boolean;
   avatar?: string;
 }
