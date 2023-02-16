@@ -5,30 +5,30 @@ import { IUserRepository } from "../../repositories/IUserRepository";
 
 interface IRequest {
   id: string;
-  name?: string;
+  username?: string;
   password?: string;
 }
 
 @injectable()
 export class UpdateUserUseCase {
   constructor(
-    @inject("UsersRepository")
+    @inject("UserRepository")
     private userRepository: IUserRepository
   ) {}
 
-  async execute({ id, name, password }: IRequest) {
+  async execute({ id, username, password }: IRequest) {
     const user = await this.userRepository.findById(id);
 
     if (!user) {
       throw new AppError("This user is not exists");
     }
 
-    if (!name && !password) {
-      throw new AppError("You need set a name or a password for update");
+    if (!username && !password) {
+      throw new AppError("You need set a username or a password for update");
     }
 
-    if (name) {
-      user.name = name;
+    if (username) {
+      user.username = username;
     }
 
     if (password) {
@@ -37,6 +37,6 @@ export class UpdateUserUseCase {
       user.password = passwordEncrypted;
     }
 
-    await this.userRepository.create(user);
+    await this.userRepository.update(user);
   }
 }

@@ -4,7 +4,7 @@ import { IUserRepository } from "../../../repositories/IUserRepository";
 import { User } from "../entities/User";
 
 export class UserRepository implements IUserRepository {
-  async create({ name, password, permission, username, avatar, id }: ICreateUser): Promise<User> {
+  async create({ name, password, permission, username, avatar, id, status }: ICreateUser): Promise<User> {
     const user = await prismaClient.user.create({
       data: {
         avatar,
@@ -12,10 +12,19 @@ export class UserRepository implements IUserRepository {
         password,
         permission,
         username,
-        id
+        id,
+        status
       }
     });
 
+    return user;
+  }
+
+  async update({ name, password, permission, username, avatar, id, status }: ICreateUser): Promise<User> {
+    const user = await prismaClient.user.update({
+      where: { id },
+      data: { avatar, name, password, permission, status, username }
+    });
     return user;
   }
 

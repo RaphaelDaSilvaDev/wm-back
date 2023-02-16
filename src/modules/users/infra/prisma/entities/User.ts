@@ -7,6 +7,7 @@ export class User {
   password!: string;
   permission!: string;
   avatar?: string | any;
+  status!: boolean;
   createdAt!: Date;
   updatedAt!: Date;
 
