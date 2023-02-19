@@ -3,6 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import { AppError } from "../../errors/AppError";
 import { router } from "./routes";
+import cors from "cors";
 
 import "../../containers";
 
@@ -10,6 +11,7 @@ const app = express();
 const port = 3333;
 
 app.use(express.json());
+app.use(cors());
 
 app.use(router);
 
