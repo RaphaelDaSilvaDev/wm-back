@@ -58,4 +58,9 @@ export class ServiceRepository implements IServiceRepository {
 
     return service;
   }
+
+  async findAllServices(): Promise<Service[]> {
+    const services = prismaClient.service.findMany({ include: { user: true } });
+    return services;
+  }
 }
