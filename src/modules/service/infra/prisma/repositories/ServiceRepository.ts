@@ -1,6 +1,5 @@
 import prismaClient from "../../../../../shared/infra/prisma/prismaClient";
 import { ICreateService } from "../../../interfaces/ICreateService";
-import { IEditService } from "../../../interfaces/IEditService";
 import { IServiceRepository } from "../../../repositories/IServiceRepository";
 import { Service } from "../entities/Service";
 
@@ -17,10 +16,8 @@ export class ServiceRepository implements IServiceRepository {
     observation,
     price,
     responsible,
-    status,
     vehicle_model,
-    vehicle_plate,
-    id
+    vehicle_plate
   }: ICreateService): Promise<Service> {
     const service = await prismaClient.service.create({
       data: {
@@ -29,7 +26,7 @@ export class ServiceRepository implements IServiceRepository {
         delivery,
         observation,
         price,
-        status,
+        status: "pending",
         vehicle_model,
         vehicle_plate,
         responsible
@@ -40,7 +37,7 @@ export class ServiceRepository implements IServiceRepository {
   }
 
   async findServiceById(id: string): Promise<Service | null> {
-    return await prismaClient.service.findUnique({ where: { id } });
+    return await prismaClient.service.findUnique({ where: { id }, include: { user: true } });
   }
 
   async editService({
@@ -53,7 +50,7 @@ export class ServiceRepository implements IServiceRepository {
   }: ICreateService): Promise<Service> {
     const service = prismaClient.service.update({
       where: { id },
-      data: { delivery, observation, price, responsible, status }
+      data: { delivery, observation, price, status, responsible }
     });
 
     return service;
