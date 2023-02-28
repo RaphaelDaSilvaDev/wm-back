@@ -4,8 +4,10 @@ import { GetAllServicesUseCase } from "./GetAllServicesUseCase";
 
 export class GetAllServicesController {
   async handle(request: Request, response: Response) {
+    const { search } = request.query;
+
     const getAllServicesUseCase = container.resolve(GetAllServicesUseCase);
-    const services = await getAllServicesUseCase.execute();
+    const services = await getAllServicesUseCase.execute(search as string);
 
     return response.json(services);
   }

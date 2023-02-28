@@ -56,8 +56,19 @@ export class ServiceRepository implements IServiceRepository {
     return service;
   }
 
-  async findAllServices(): Promise<Service[]> {
-    const services = prismaClient.service.findMany({ include: { user: true } });
+  async findAllServices(search?: string): Promise<Service[]> {
+    const services = prismaClient.service.findMany({
+      include: { user: true },
+      where: {
+        OR: [
+          { client_name: { contains: search, mode: "insensitive" } },
+          { client_phone: { contains: search, mode: "insensitive" } },
+          { vehicle_model: { contains: search, mode: "insensitive" } },
+          { vehicle_plate: { contains: search, mode: "insensitive" } },
+          { user: { name: { contains: search, mode: "insensitive" } } }
+        ]
+      }
+    });
     return services;
   }
 }
