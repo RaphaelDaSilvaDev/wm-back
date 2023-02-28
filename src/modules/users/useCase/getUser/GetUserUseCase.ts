@@ -2,15 +2,15 @@ import { inject, injectable } from "tsyringe";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
 @injectable()
-export class ListUsersUseCase {
+export class GetUserUseCase {
   constructor(
     @inject("UserRepository")
     private userRepository: IUserRepository
   ) {}
 
-  async execute(search: string) {
-    const users = await this.userRepository.listAll(search);
+  async execute(id: string) {
+    const user = await this.userRepository.findById(id);
 
-    return users;
+    return user;
   }
 }
