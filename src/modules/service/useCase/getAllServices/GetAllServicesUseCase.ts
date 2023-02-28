@@ -8,8 +8,8 @@ export class GetAllServicesUseCase {
     private serviceRepository: IServiceRepository
   ) {}
 
-  async execute() {
-    const services = await this.serviceRepository.findAllServices();
+  async execute(search: string) {
+    const services = await this.serviceRepository.findAllServices(search);
 
     return services;
   }

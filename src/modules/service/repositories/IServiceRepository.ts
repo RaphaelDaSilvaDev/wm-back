@@ -7,5 +7,5 @@ export interface IServiceRepository {
   create(service: ICreateService): Promise<Service>;
   findServiceById(id: string): Promise<Service | null>;
   editService(service: ICreateService): Promise<Service>;
-  findAllServices(): Promise<Service[]>;
+  findAllServices(search?: string): Promise<Service[]>;
 }
