@@ -15,6 +15,7 @@ interface IResponse {
     username: string;
     avatar: string;
     permission: string;
+    id: string;
   };
   token: string;
 }
@@ -54,7 +55,8 @@ export class AuthenticationUserUseCase {
         name: user.name,
         username: user.username,
         permission: user.permission,
-        avatar: user.avatar
+        avatar: user.avatar,
+        id: user?.id ? user.id : ""
       }
     };
 
