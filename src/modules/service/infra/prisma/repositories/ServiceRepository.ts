@@ -57,7 +57,7 @@ export class ServiceRepository implements IServiceRepository {
   }
 
   async findAllServices(search?: string): Promise<Service[]> {
-    const services = prismaClient.service.findMany({
+    const services = await prismaClient.service.findMany({
       include: { user: true },
       where: {
         OR: [

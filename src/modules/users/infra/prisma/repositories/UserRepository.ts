@@ -32,8 +32,18 @@ export class UserRepository implements IUserRepository {
     return await prismaClient.user.findFirst({ where: { username } });
   }
 
-  async listAll(): Promise<User[]> {
-    return await prismaClient.user.findMany();
+  async listAll(search?: string): Promise<User[]> {
+    const users = await prismaClient.user.findMany({
+      orderBy: { status: "desc" },
+      where: {
+        OR: [
+          { name: { contains: search ? search : "", mode: "insensitive" } },
+          { username: { contains: search ? search : "", mode: "insensitive" } }
+        ]
+      }
+    });
+
+    return users;
   }
 
   async findById(id: string): Promise<User | null> {
