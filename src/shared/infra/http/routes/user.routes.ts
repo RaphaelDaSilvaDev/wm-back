@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Router } from "express";
 import { AuthenticationUserController } from "../../../../modules/users/useCase/authenticationUser/AuthenticationUserController";
 import { CreateUseController } from "../../../../modules/users/useCase/createUser/CreateUserController";
 import { GetUserController } from "../../../../modules/users/useCase/getUser/GetUserController";

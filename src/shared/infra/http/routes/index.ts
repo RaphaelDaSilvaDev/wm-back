@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import { serviceRoute } from "./service.routes";
 import { userRoute } from "./user.routes";
 

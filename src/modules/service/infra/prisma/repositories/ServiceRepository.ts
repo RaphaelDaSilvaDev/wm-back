@@ -1,4 +1,4 @@
-import prismaClient from "../../../../../shared/infra/prisma/prismaClient";
+import { prismaClient } from "../../../../../shared/infra/http/server";
 import { ICreateService } from "../../../interfaces/ICreateService";
 import { IServiceRepository } from "../../../repositories/IServiceRepository";
 import { Service } from "../entities/Service";
