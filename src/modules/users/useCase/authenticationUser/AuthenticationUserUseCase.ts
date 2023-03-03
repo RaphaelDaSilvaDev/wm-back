@@ -5,11 +5,13 @@ import { AppError } from "../../../../shared/errors/AppError";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
 interface IRequest {
+  clientCode: string;
   username: string;
   password: string;
 }
 
 interface IResponse {
+  clientCode: string;
   user: {
     name: string;
     username: string;
@@ -27,7 +29,7 @@ export class AuthenticationUserUseCase {
     private userRepository: IUserRepository
   ) {}
 
-  async execute({ username, password }: IRequest): Promise<IResponse> {
+  async execute({ clientCode, username, password }: IRequest): Promise<IResponse> {
     const user = await this.userRepository.findByUserName(username);
 
     if (!user) {
@@ -51,6 +53,7 @@ export class AuthenticationUserUseCase {
 
     const tokenReturn: IResponse = {
       token,
+      clientCode,
       user: {
         name: user.name,
         username: user.username,
