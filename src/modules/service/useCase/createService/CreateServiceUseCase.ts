@@ -11,32 +11,30 @@ export class CreateServiceUseCase {
   ) {}
 
   async execute({
-    client_name,
-    client_phone,
+    client_observation,
+    responsible_observation,
     delivery,
-    observation,
     price,
-    responsible,
+    responsible: userResponsible,
     status,
-    vehicle_model,
-    vehicle_plate
+    clientId,
+    vehicleId
   }: ICreateService) {
-    const findCarPlate = await this.serviceRepository.findByCarPlate(vehicle_plate);
+    const findCarById = await this.serviceRepository.findByCarId(vehicleId);
 
-    if (findCarPlate) {
-      throw new AppError("This vehicle already has a service!");
+    if (findCarById?.status !== "delivered") {
+      throw new AppError("Este carro já tem um serviço em andamento!");
     }
 
     const service = await this.serviceRepository.create({
-      client_name,
-      client_phone,
+      client_observation,
+      responsible_observation,
       delivery,
-      observation,
       price,
-      responsible,
+      responsible: userResponsible,
       status: "pendente",
-      vehicle_model,
-      vehicle_plate
+      clientId,
+      vehicleId
     });
 
     return service;

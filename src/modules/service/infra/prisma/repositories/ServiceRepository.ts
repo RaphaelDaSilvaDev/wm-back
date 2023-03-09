@@ -4,28 +4,30 @@ import { IServiceRepository } from "../../../repositories/IServiceRepository";
 import { Service } from "../entities/Service";
 
 export class ServiceRepository implements IServiceRepository {
-  async findByCarPlate(plate: string): Promise<Service | null> {
-    const service = await prismaClient.service.findFirst({ where: { vehicle: { plate } } });
+  async findByCarId(id: string): Promise<Service | null> {
+    const service = await prismaClient.service.findFirst({ where: { vehicle: { id } } });
     return service;
   }
 
   async create({
-    clientId,
+    client_observation,
+    responsible_observation,
     delivery,
-    observation,
     price,
-    responsible,
     status,
+    responsible,
+    clientId,
     vehicleId
   }: ICreateService): Promise<Service> {
     const service = await prismaClient.service.create({
       data: {
-        clientId,
+        client_observation,
+        responsible_observation,
         delivery,
-        observation,
         price,
-        responsible,
         status,
+        responsible,
+        clientId,
         vehicleId
       }
     });
@@ -41,17 +43,10 @@ export class ServiceRepository implements IServiceRepository {
     return service;
   }
 
-  async editService({
-    delivery,
-    id,
-    observation,
-    price,
-    responsible,
-    status
-  }: ICreateService): Promise<Service> {
+  async editService({ delivery, id, price, responsible, status }: ICreateService): Promise<Service> {
     const service = await prismaClient.service.update({
       where: { id },
-      data: { delivery, observation, price, status, responsible }
+      data: { delivery, price, status, responsible }
     });
 
     return service;

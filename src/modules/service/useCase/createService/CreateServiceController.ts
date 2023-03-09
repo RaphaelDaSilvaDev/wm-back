@@ -6,15 +6,14 @@ export class CreateServiceController {
   async handle(request: Request, response: Response) {
     const { id } = request.user;
     const {
-      client_name,
-      client_phone,
+      client_observation,
+      responsible_observation,
       delivery,
-      observation,
       price,
-      responsible,
       status,
-      vehicle_model,
-      vehicle_plate
+      responsible,
+      clientId,
+      vehicleId
     } = request.body;
 
     const createServiceUseCase = container.resolve(CreateServiceUseCase);
@@ -22,15 +21,14 @@ export class CreateServiceController {
     const userResponsible = responsible ? responsible : id;
 
     const service = await createServiceUseCase.execute({
-      client_name,
-      client_phone,
+      client_observation,
+      responsible_observation,
       delivery,
-      observation,
       price,
       responsible: userResponsible,
       status,
-      vehicle_model,
-      vehicle_plate
+      clientId,
+      vehicleId
     });
 
     return response.json(service);
