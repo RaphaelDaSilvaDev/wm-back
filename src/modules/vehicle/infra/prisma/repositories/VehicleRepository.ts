@@ -23,7 +23,12 @@ export class VehicleRepository implements IVehicleRepository {
   }
 
   async listAll(): Promise<Vehicle[]> {
-    const vehicles = await prismaClient.vehicle.findMany();
+    const vehicles = await prismaClient.vehicle.findMany({ include: { Client: true } });
+    return vehicles;
+  }
+
+  async listByClient(client_id: string): Promise<Vehicle[]> {
+    const vehicles = await prismaClient.vehicle.findMany({ where: { clientId: client_id } });
     return vehicles;
   }
 }

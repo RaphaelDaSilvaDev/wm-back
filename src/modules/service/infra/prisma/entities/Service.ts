@@ -3,18 +3,16 @@ import { Client, ServiceProducts, User, Vehicle } from "@prisma/client";
 
 export class Service {
   id?: string;
-  client?: string;
-  vehicle?: string;
-  observation!: string;
+  client_observation!: string | null;
+  responsible_observation!: string | null;
   delivery!: Date;
   price!: number;
   status!: string;
-  user?: string;
   responsible!: string;
+  clientId!: string;
+  vehicleId!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  clientId?: string;
-  vehicleId?: string;
 
   constructor() {
     if (!this.id) {

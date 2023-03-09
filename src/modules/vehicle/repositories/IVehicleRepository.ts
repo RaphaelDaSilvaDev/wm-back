@@ -6,4 +6,5 @@ export interface IVehicleRepository {
   findByPlate(plate: string): Promise<Vehicle | null>;
   findById(id: string): Promise<Vehicle | null>;
   listAll(): Promise<Vehicle[]>;
+  listByClient(client_id: string): Promise<Vehicle[]>;
 }

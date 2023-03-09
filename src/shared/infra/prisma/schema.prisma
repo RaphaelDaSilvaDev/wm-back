@@ -31,20 +31,21 @@ model User {
 }
 
 model Service {
-  id              String            @id() @default(uuid())
-  client          Client            @relation(references: [id], fields: [clientId])
-  vehicle         Vehicle           @relation(references: [id], fields: [vehicleId])
-  observation     String
-  delivery        DateTime
-  price           Float
-  status          String
-  user            User              @relation(fields: [responsible], references: [id])
-  responsible     String
-  serviceProducts ServiceProducts[]
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt()
-  clientId        String
-  vehicleId       String
+  id                      String            @id() @default(uuid())
+  client                  Client            @relation(references: [id], fields: [clientId])
+  vehicle                 Vehicle           @relation(references: [id], fields: [vehicleId])
+  client_observation      String?
+  responsible_observation String?
+  delivery                DateTime
+  price                   Float
+  status                  String
+  user                    User              @relation(fields: [responsible], references: [id])
+  responsible             String
+  serviceProducts         ServiceProducts[]
+  createdAt               DateTime          @default(now())
+  updatedAt               DateTime          @updatedAt()
+  clientId                String
+  vehicleId               String
 }
 
 model Product {

@@ -10,5 +10,6 @@ const vehicleRoute = Router();
 
 vehicleRoute.post("/", ensureAuthenticated, createVehicleController.handle);
 vehicleRoute.get("/", ensureAuthenticated, listVehivleController.handle);
+vehicleRoute.get("/client/:id", ensureAuthenticated, listVehivleController.handle);
 
 export { vehicleRoute };
