@@ -9,10 +9,10 @@ export class Service {
   price!: number;
   status!: string;
   responsible!: string;
+  clientId!: string;
+  vehicleId!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  clientId?: string;
-  vehicleId?: string;
 
   constructor() {
     if (!this.id) {

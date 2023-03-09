@@ -22,8 +22,10 @@ export class CreateServiceUseCase {
   }: ICreateService) {
     const findCarById = await this.serviceRepository.findByCarId(vehicleId);
 
-    if (findCarById?.status !== "delivered") {
-      throw new AppError("Este carro já tem um serviço em andamento!");
+    if (findCarById) {
+      if (findCarById.status !== "delivered") {
+        throw new AppError("This vehicle already has a service!");
+      }
     }
 
     const service = await this.serviceRepository.create({
@@ -32,7 +34,7 @@ export class CreateServiceUseCase {
       delivery,
       price,
       responsible: userResponsible,
-      status: "pendente",
+      status: status ? status : "pending",
       clientId,
       vehicleId
     });
