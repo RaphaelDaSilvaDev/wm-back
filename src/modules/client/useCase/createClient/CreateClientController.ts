@@ -30,7 +30,7 @@ export class CreateClientController {
       addressNumber,
       addressState,
       addressStreet,
-      bornAt,
+      bornAt: new Date(bornAt),
       cellphoneNumber,
       cep,
       document,
