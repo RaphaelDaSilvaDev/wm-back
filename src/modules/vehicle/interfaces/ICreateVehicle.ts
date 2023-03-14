@@ -6,5 +6,5 @@ export interface ICreateVehicle {
   modelYear: Date;
   fuel: string;
   color: string;
-  client: string;
+  clientId: string;
 }

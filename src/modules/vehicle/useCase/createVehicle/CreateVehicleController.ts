@@ -4,18 +4,18 @@ import { CreateVehicleUseCase } from "./CreateVehicleUseCase";
 
 export class CreateVehicleController {
   async handle(request: Request, response: Response) {
-    const { plate, brand, model, launchYear, modelYear, fuel, color, client } = request.body;
+    const { plate, brand, model, launchYear, fuel, color, clientId } = request.body;
 
     const createVehicleUseCase = container.resolve(CreateVehicleUseCase);
 
     const vehicle = await createVehicleUseCase.execute({
       brand,
-      client,
+      clientId,
       color,
       fuel,
-      launchYear,
+      launchYear: new Date(launchYear.split("/")[0]),
       model,
-      modelYear,
+      modelYear: new Date(launchYear.split("/")[1]),
       plate
     });
 
