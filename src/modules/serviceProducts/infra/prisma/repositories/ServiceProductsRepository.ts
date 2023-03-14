@@ -13,7 +13,10 @@ export class ServiceProductsRepository implements IServiceProductsRepository {
   }
 
   async findByService(serviceId: string): Promise<ServiceProducts[]> {
-    const serviceProduct = await prismaClient.serviceProducts.findMany({ where: { serviceId } });
+    const serviceProduct = await prismaClient.serviceProducts.findMany({
+      where: { serviceId },
+      include: { product: true }
+    });
     return serviceProduct;
   }
 }
