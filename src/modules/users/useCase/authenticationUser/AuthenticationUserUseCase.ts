@@ -13,11 +13,11 @@ interface IRequest {
 interface IResponse {
   clientCode: string;
   user: {
-    name: string;
-    username: string;
-    avatar: string;
-    permission: string;
-    id: string;
+    name?: string;
+    username?: string;
+    avatar?: string | null;
+    permission?: string;
+    id?: string;
   };
   token: string;
 }
@@ -40,7 +40,7 @@ export class AuthenticationUserUseCase {
       throw new AppError("Username or Password incorrect!");
     }
 
-    const passwordMatch = await compare(password, user.password);
+    const passwordMatch = await compare(password, user.password ? user.password : "");
 
     if (!passwordMatch) {
       throw new AppError("Username or Password incorrect!");

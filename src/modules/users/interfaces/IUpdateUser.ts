@@ -1,11 +1,6 @@
-import { v4 as uuidV4 } from "uuid";
-
-export class User {
-  id!: string;
-  name?: string;
+export interface IUpdateUser {
+  id?: string;
   username?: string;
-  document?: string | null;
-  bornAt?: Date | null;
   phoneNumber?: string | null;
   cellphoneNumber?: string | null;
   email?: string | null;
@@ -18,12 +13,4 @@ export class User {
   avatar?: string | null;
   password?: string;
   status?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-
-  constructor() {
-    if (!this.id) {
-      this.id = uuidV4();
-    }
-  }
 }

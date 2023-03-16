@@ -9,14 +9,14 @@ export class ToggleUserStatusUseCase {
     private userRepository: IUserRepository
   ) {}
 
-  async execute(id: string) {
+  async execute(id: string, status: string) {
     const user = await this.userRepository.findById(id);
 
     if (!user) {
       throw new AppError("User don't exists!");
     }
 
-    user.status = !user.status;
+    user.status = status;
 
     await this.userRepository.update(user);
   }

@@ -2,8 +2,18 @@ export interface ICreateUser {
   id?: string;
   name: string;
   username: string;
-  password: string;
+  document: string | null;
+  bornAt: Date | null;
+  phoneNumber: string | null;
+  cellphoneNumber: string | null;
+  email: string | null;
+  addressState: string | null;
+  addressCity: string | null;
+  addressDistrict: string | null;
+  addressStreet: string | null;
+  addressNumber: string | null;
   permission: string;
-  status?: boolean;
-  avatar?: string;
+  avatar?: string | null;
+  password: string;
+  status?: string;
 }

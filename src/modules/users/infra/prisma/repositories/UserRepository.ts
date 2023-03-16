@@ -4,26 +4,83 @@ import { IUserRepository } from "../../../repositories/IUserRepository";
 import { User } from "../entities/User";
 
 export class UserRepository implements IUserRepository {
-  async create({ name, password, permission, username, avatar, id, status }: ICreateUser): Promise<User> {
+  async create({
+    password,
+    permission,
+    username,
+    avatar,
+    id,
+    status,
+    addressCity,
+    addressDistrict,
+    addressNumber,
+    addressState,
+    addressStreet,
+    cellphoneNumber,
+    phoneNumber,
+    email,
+    bornAt,
+    document,
+    name
+  }: ICreateUser): Promise<User> {
     const user = await prismaClient.user.create({
       data: {
-        avatar,
-        name,
         password,
         permission,
         username,
+        avatar,
         id,
-        status
+        status,
+        addressCity,
+        addressDistrict,
+        addressNumber,
+        addressState,
+        addressStreet,
+        cellphoneNumber,
+        phoneNumber,
+        email,
+        name,
+        bornAt,
+        document
       }
     });
 
     return user;
   }
 
-  async update({ name, password, permission, username, avatar, id, status }: ICreateUser): Promise<User> {
+  async update({
+    password,
+    permission,
+    username,
+    avatar,
+    id,
+    status,
+    addressCity,
+    addressDistrict,
+    addressNumber,
+    addressState,
+    addressStreet,
+    cellphoneNumber,
+    phoneNumber,
+    email
+  }: ICreateUser): Promise<User> {
     const user = await prismaClient.user.update({
       where: { id },
-      data: { avatar, name, password, permission, status, username }
+      data: {
+        avatar,
+        password,
+        permission,
+        status,
+        username,
+        addressCity,
+        addressDistrict,
+        addressNumber,
+        addressState,
+        addressStreet,
+        cellphoneNumber,
+        phoneNumber,
+        email
+      }
     });
     return user;
   }
