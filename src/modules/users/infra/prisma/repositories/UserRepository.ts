@@ -95,7 +95,9 @@ export class UserRepository implements IUserRepository {
       where: {
         OR: [
           { name: { contains: search ? search : "", mode: "insensitive" } },
-          { username: { contains: search ? search : "", mode: "insensitive" } }
+          { username: { contains: search ? search : "", mode: "insensitive" } },
+          { cellphoneNumber: { contains: search ? search : "", mode: "insensitive" } },
+          { email: { contains: search ? search : "", mode: "insensitive" } }
         ]
       }
     });
