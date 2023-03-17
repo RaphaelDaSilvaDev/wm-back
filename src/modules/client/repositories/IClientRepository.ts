@@ -7,5 +7,5 @@ export interface IClientRepository {
   findByDocument(document: string): Promise<Client | null>;
   findById(id: string): Promise<Client | null>;
   update(data: IUpdateClient, id: string): Promise<Client>;
-  listAll(): Promise<Client[]>;
+  listAll(search?: string): Promise<Client[]>;
 }
