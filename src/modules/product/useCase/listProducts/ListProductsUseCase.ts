@@ -8,8 +8,8 @@ export class ListProductsUseCase {
     private productRepository: IProductRepository
   ) {}
 
-  async execute() {
-    const products = await this.productRepository.listAll();
+  async execute(search?: string) {
+    const products = await this.productRepository.listAll(search);
 
     return products;
   }

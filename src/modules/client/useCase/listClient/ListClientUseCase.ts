@@ -8,8 +8,8 @@ export class ListClientUseCase {
     private clientRepository: IClientRepository
   ) {}
 
-  async execute() {
-    const clients = await this.clientRepository.listAll();
+  async execute(search?: string) {
+    const clients = await this.clientRepository.listAll(search);
 
     return clients;
   }

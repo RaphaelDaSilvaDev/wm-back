@@ -8,8 +8,8 @@ export class ListVehicleUseCase {
     private vehicleRepository: IVehicleRepository
   ) {}
 
-  async execute() {
-    const vehicles = await this.vehicleRepository.listAll();
+  async execute(search?: string) {
+    const vehicles = await this.vehicleRepository.listAll(search);
 
     return vehicles;
   }

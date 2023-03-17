@@ -11,7 +11,6 @@ export class CreateVehicleUseCase {
   ) {}
 
   async execute(data: ICreateVehicle) {
-    console.log(data);
     const findVehicle = await this.vehicleRepository.findByPlate(data.plate);
     if (findVehicle) {
       throw new AppError("Este carro já está cadastrado");

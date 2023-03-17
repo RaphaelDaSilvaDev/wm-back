@@ -17,7 +17,7 @@ async function CreateMaster() {
       username: "master",
       avatar: null,
       createdAt: new Date(),
-      status: true,
+      status: "active",
       updatedAt: new Date()
     }
   });
@@ -28,7 +28,6 @@ CreateMaster()
     await prismaClient.$disconnect();
   })
   .catch(async (e) => {
-    console.log(e);
     await prismaClient.$disconnect();
     process.exit(1);
   });

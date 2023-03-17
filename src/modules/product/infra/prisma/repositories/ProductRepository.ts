@@ -22,8 +22,30 @@ export class ProductRepository implements IProductRepository {
     return product;
   }
 
-  async listAll(): Promise<Product[]> {
-    const products = await prismaClient.product.findMany({ include: { category: true } });
+  async listAll(search?: string): Promise<Product[]> {
+    const products = await prismaClient.product.findMany({
+      include: { category: true },
+      where: {
+        OR: [
+          {
+            OR: [
+              {
+                name: { contains: search, mode: "insensitive" }
+              },
+              {
+                description: { contains: search, mode: "insensitive" }
+              },
+              {
+                brand: { contains: search, mode: "insensitive" }
+              }
+            ]
+          },
+          {
+            category: { name: { contains: search, mode: "insensitive" } }
+          }
+        ]
+      }
+    });
     return products;
   }
 }

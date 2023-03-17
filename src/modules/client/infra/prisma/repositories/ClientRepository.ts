@@ -32,8 +32,35 @@ export class ClientRepository implements IClientRepository {
     return client;
   }
 
-  async listAll(): Promise<Client[]> {
-    const clients = await prismaClient.client.findMany();
+  async listAll(search?: string): Promise<Client[]> {
+    const clients = await prismaClient.client.findMany(
+      search
+        ? {
+            where: {
+              OR: [
+                {
+                  name: { contains: search, mode: "insensitive" }
+                },
+                {
+                  email: { contains: search, mode: "insensitive" }
+                },
+                {
+                  addressCity: { contains: search, mode: "insensitive" }
+                },
+                {
+                  addressState: { contains: search, mode: "insensitive" }
+                },
+                {
+                  cellphoneNumber: { contains: search, mode: "insensitive" }
+                },
+                {
+                  phoneNumber: { contains: search, mode: "insensitive" }
+                }
+              ]
+            }
+          }
+        : undefined
+    );
     return clients;
   }
 }

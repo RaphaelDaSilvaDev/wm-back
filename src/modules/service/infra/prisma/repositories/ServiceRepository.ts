@@ -53,23 +53,26 @@ export class ServiceRepository implements IServiceRepository {
   }
 
   async findAllServices(search?: string): Promise<Service[]> {
+    const convertStatus =
+      search?.toLowerCase() === "aguardando"
+        ? "pending"
+        : search?.toLocaleLowerCase() === "entregue"
+        ? "delivered"
+        : search?.toLocaleLowerCase() === "aprovado"
+        ? "approved"
+        : search?.toLocaleLowerCase() === "negado"
+        ? "denied"
+        : search;
     const services = await prismaClient.service.findMany({
       include: { user: true, client: true, serviceProducts: true, vehicle: true },
       where: {
         OR: [
           {
+            status: { contains: convertStatus, mode: "insensitive" }
+          },
+          {
             client: {
-              OR: [
-                {
-                  name: { contains: search, mode: "insensitive" }
-                },
-                {
-                  phoneNumber: { contains: search, mode: "insensitive" }
-                },
-                {
-                  cellphoneNumber: { contains: search, mode: "insensitive" }
-                }
-              ]
+              name: { contains: search, mode: "insensitive" }
             }
           },
           {
@@ -80,6 +83,9 @@ export class ServiceRepository implements IServiceRepository {
                 },
                 {
                   brand: { contains: search, mode: "insensitive" }
+                },
+                {
+                  plate: { contains: search, mode: "insensitive" }
                 }
               ]
             }

@@ -5,6 +5,6 @@ export interface IVehicleRepository {
   create(data: ICreateVehicle): Promise<Vehicle>;
   findByPlate(plate: string): Promise<Vehicle | null>;
   findById(id: string): Promise<Vehicle | null>;
-  listAll(): Promise<Vehicle[]>;
+  listAll(search?: string): Promise<Vehicle[]>;
   listByClient(client_id: string): Promise<Vehicle[]>;
 }
