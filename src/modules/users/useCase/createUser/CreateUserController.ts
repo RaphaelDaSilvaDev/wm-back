@@ -29,7 +29,7 @@ export class CreateUseController {
       name,
       username,
       document,
-      bornAt,
+      bornAt: new Date(bornAt),
       phoneNumber,
       cellphoneNumber,
       email,
@@ -38,7 +38,7 @@ export class CreateUseController {
       addressDistrict,
       addressStreet,
       addressNumber,
-      permission,
+      permission: permission ? permission : "user",
       avatar,
       password: password ? password : "user",
       status: status ? status : "inactive"
