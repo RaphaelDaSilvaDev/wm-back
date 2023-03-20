@@ -3,7 +3,7 @@ import { prismaClient } from "../../../../../shared/infra/http/server";
 import { ICreateVehicle } from "../../../interfaces/ICreateVehicle";
 import { IVehicleRepository } from "../../../repositories/IVehicleRepository";
 
-export class VehicleRepository implements IVehicleRepository {
+export class vehicleRepository implements IVehicleRepository {
   async create(data: ICreateVehicle): Promise<Vehicle> {
     const vehicle = await prismaClient.vehicle.create({
       data: data
@@ -18,7 +18,7 @@ export class VehicleRepository implements IVehicleRepository {
   }
 
   async findById(id: string): Promise<Vehicle | null> {
-    const vehicle = await prismaClient.vehicle.findUnique({ where: { id } });
+    const vehicle = await prismaClient.vehicle.findUnique({ where: { id }, include: { Client: true } });
     return vehicle;
   }
 
@@ -52,5 +52,14 @@ export class VehicleRepository implements IVehicleRepository {
   async listByClient(client_id: string): Promise<Vehicle[]> {
     const vehicles = await prismaClient.vehicle.findMany({ where: { clientId: client_id } });
     return vehicles;
+  }
+
+  async updatedVehicle(client_id: string, id: string): Promise<Vehicle> {
+    const vehicle = await prismaClient.vehicle.update({
+      where: { id },
+      data: { clientId: client_id }
+    });
+
+    return vehicle;
   }
 }

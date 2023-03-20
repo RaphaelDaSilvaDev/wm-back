@@ -7,4 +7,5 @@ export interface IVehicleRepository {
   findById(id: string): Promise<Vehicle | null>;
   listAll(search?: string): Promise<Vehicle[]>;
   listByClient(client_id: string): Promise<Vehicle[]>;
+  updatedVehicle(client_id: string, id: string): Promise<Vehicle>;
 }
