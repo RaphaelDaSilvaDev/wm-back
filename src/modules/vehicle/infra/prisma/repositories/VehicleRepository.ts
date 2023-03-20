@@ -30,18 +30,18 @@ export class VehicleRepository implements IVehicleRepository {
           {
             OR: [
               {
-                brand: { contains: search, mode: "insensitive" }
+                brand: { contains: search ? search : "", mode: "insensitive" }
               },
               {
-                plate: { contains: search, mode: "insensitive" }
+                plate: { contains: search ? search : "", mode: "insensitive" }
               },
               {
-                model: { contains: search, mode: "insensitive" }
+                model: { contains: search ? search : "", mode: "insensitive" }
               }
             ]
           },
           {
-            Client: { name: { contains: search, mode: "insensitive" } }
+            Client: { name: { contains: search ? search : "", mode: "insensitive" } }
           }
         ]
       }
