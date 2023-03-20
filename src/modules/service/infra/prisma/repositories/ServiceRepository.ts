@@ -1,5 +1,6 @@
 import { prismaClient } from "../../../../../shared/infra/http/server";
 import { ICreateService } from "../../../interfaces/ICreateService";
+import { IEditService } from "../../../interfaces/IEditService";
 import { IServiceRepository } from "../../../repositories/IServiceRepository";
 import { Service } from "../entities/Service";
 
@@ -43,26 +44,32 @@ export class ServiceRepository implements IServiceRepository {
     return service;
   }
 
-  async editService({ delivery, id, price, responsible, status }: ICreateService): Promise<Service> {
+  async editService({
+    delivery,
+    id,
+    price,
+    responsible,
+    responsible_observation,
+    status
+  }: IEditService): Promise<Service> {
     const service = await prismaClient.service.update({
       where: { id },
-      data: { delivery, price, status, responsible }
+      data: { delivery, price, responsible, responsible_observation, status }
     });
 
     return service;
   }
 
   async findAllServices(search?: string): Promise<Service[]> {
-    const convertStatus =
-      search?.toLowerCase() === "aguardando"
-        ? "pending"
-        : search?.toLocaleLowerCase() === "entregue"
-        ? "delivered"
-        : search?.toLocaleLowerCase() === "aprovado"
-        ? "approved"
-        : search?.toLocaleLowerCase() === "negado"
-        ? "denied"
-        : search;
+    const convertStatus = "aguardando".includes(search ? search?.toLowerCase() : "")
+      ? "pending"
+      : "entregue".includes(search ? search?.toLocaleLowerCase() : "")
+      ? "delivered"
+      : "aprovado".includes(search ? search?.toLocaleLowerCase() : "")
+      ? "approved"
+      : "negado".includes(search ? search?.toLocaleLowerCase() : "")
+      ? "denied"
+      : search;
     const services = await prismaClient.service.findMany({
       include: { user: true, client: true, serviceProducts: true, vehicle: true },
       where: {
