@@ -52,11 +52,11 @@ model Product {
   id              String            @id() @default(uuid())
   barCode         String?
   name            String
-  brand           String?
-  quantity        Int?
-  minQuantity     Int?
-  valueToBuy      Float?
-  valueToSell     Float?
+  brand           String
+  quantity        Int
+  minQuantity     Int
+  valueToBuy      Float
+  valueToSell     Float
   description     String
   category        Category?         @relation(references: [id], fields: [categoryId])
   createdAt       DateTime          @default(now())
