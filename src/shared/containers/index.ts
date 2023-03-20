@@ -11,13 +11,13 @@ import { ServiceProductsRepository } from "../../modules/serviceProducts/infra/p
 import { IServiceProductsRepository } from "../../modules/serviceProducts/repositories/IServiceProductsRepository";
 import { UserRepository } from "../../modules/users/infra/prisma/repositories/UserRepository";
 import { IUserRepository } from "../../modules/users/repositories/IUserRepository";
-import { VehicleRepository } from "../../modules/vehicle/infra/prisma/repositories/VehicleRepository";
+import { vehicleRepository } from "../../modules/vehicle/infra/prisma/repositories/VehicleRepository";
 import { IVehicleRepository } from "../../modules/vehicle/repositories/IVehicleRepository";
 
 container.registerSingleton<IUserRepository>("UserRepository", UserRepository);
 container.registerSingleton<IServiceRepository>("ServiceRepository", ServiceRepository);
 container.registerSingleton<IClientRepository>("ClientRepository", ClientRepository);
-container.registerSingleton<IVehicleRepository>("VehicleRepository", VehicleRepository);
+container.registerSingleton<IVehicleRepository>("VehicleRepository", vehicleRepository);
 container.registerSingleton<IProductRepository>("ProductRepository", ProductRepository);
 container.registerSingleton<IServiceProductsRepository>(
   "ServiceProductsRepository",
