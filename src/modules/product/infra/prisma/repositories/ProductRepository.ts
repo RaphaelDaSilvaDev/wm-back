@@ -1,6 +1,7 @@
 import { Product } from "@prisma/client";
 import { prismaClient } from "../../../../../shared/infra/http/server";
 import { ICreateProduct } from "../../../interfaces/ICreateProduct";
+import { IEditProduct } from "../../../interfaces/IEditProduct";
 import { IProductRepository } from "../../../repositories/IProductRepository";
 
 export class ProductRepository implements IProductRepository {
@@ -18,7 +19,7 @@ export class ProductRepository implements IProductRepository {
   }
 
   async findById(id: string): Promise<Product | null> {
-    const product = await prismaClient.product.findUnique({ where: { id } });
+    const product = await prismaClient.product.findUnique({ where: { id }, include: { category: true } });
     return product;
   }
 
@@ -47,5 +48,27 @@ export class ProductRepository implements IProductRepository {
       }
     });
     return products;
+  }
+
+  async editProduct(
+    {
+      barCode,
+      brand,
+      categoryId,
+      description,
+      minQuantity,
+      name,
+      quantity,
+      valueToBuy,
+      valueToSell
+    }: IEditProduct,
+    id: string
+  ): Promise<Product> {
+    const product = await prismaClient.product.update({
+      where: { id },
+      data: { barCode, brand, categoryId, description, minQuantity, name, quantity, valueToBuy, valueToSell }
+    });
+
+    return product;
   }
 }
