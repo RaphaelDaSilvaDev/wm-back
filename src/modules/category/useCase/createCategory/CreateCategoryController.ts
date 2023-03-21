@@ -8,7 +8,7 @@ export class CreateCategoryController {
 
     const createCategoryUseCase = container.resolve(CreateCategoryUseCase);
 
-    const category = await createCategoryUseCase.execute(name);
+    const category = await createCategoryUseCase.execute({ name });
 
     return response.json(category);
   }
