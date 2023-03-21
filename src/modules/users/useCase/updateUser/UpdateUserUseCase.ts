@@ -1,13 +1,8 @@
 import { hash } from "bcrypt";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
+import { IUpdateUser } from "../../interfaces/IUpdateUser";
 import { IUserRepository } from "../../repositories/IUserRepository";
-
-interface IRequest {
-  id: string;
-  username?: string;
-  password?: string;
-}
 
 @injectable()
 export class UpdateUserUseCase {
@@ -16,14 +11,27 @@ export class UpdateUserUseCase {
     private userRepository: IUserRepository
   ) {}
 
-  async execute({ id, username, password }: IRequest) {
+  async execute(
+    {
+      addressCity,
+      addressDistrict,
+      addressNumber,
+      addressState,
+      addressStreet,
+      avatar,
+      cellphoneNumber,
+      email,
+      phoneNumber
+    }: IUpdateUser,
+    id: string
+  ) {
     const user = await this.userRepository.findById(id);
 
     if (!user) {
-      throw new AppError("This user is not exists");
+      throw new AppError("Usuário não encontrado!");
     }
 
-    if (!username && !password) {
+    /*   if (!username && !password) {
       throw new AppError("You need set a username or a password for update");
     }
 
@@ -35,7 +43,17 @@ export class UpdateUserUseCase {
       const passwordEncrypted = await hash(password, 8);
 
       user.password = passwordEncrypted;
-    }
+    } */
+
+    if (addressCity) user.addressCity = addressCity;
+    if (addressDistrict) user.addressDistrict = addressDistrict;
+    if (addressNumber) user.addressNumber = addressNumber;
+    if (addressState) user.addressState = addressState;
+    if (addressStreet) user.addressStreet = addressStreet;
+    if (avatar) user.avatar = avatar;
+    if (cellphoneNumber) user.cellphoneNumber = cellphoneNumber;
+    if (email) user.email = email;
+    if (phoneNumber) user.phoneNumber = phoneNumber;
 
     await this.userRepository.update(user);
   }

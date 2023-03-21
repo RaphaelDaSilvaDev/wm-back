@@ -4,13 +4,35 @@ import { UpdateUserUseCase } from "./UpdateUserUseCase";
 
 export class UpdateUserController {
   async handle(request: Request, response: Response) {
-    const { id } = request.user;
     const { userId } = request.params;
-    const { username, password } = request.body;
+    const {
+      addressCity,
+      addressDistrict,
+      addressNumber,
+      addressState,
+      addressStreet,
+      avatar,
+      cellphoneNumber,
+      email,
+      phoneNumber
+    } = request.body;
 
     const updateUserUseCase = container.resolve(UpdateUserUseCase);
 
-    await updateUserUseCase.execute({ id: userId ? userId : id, username, password });
+    await updateUserUseCase.execute(
+      {
+        addressCity,
+        addressDistrict,
+        addressNumber,
+        addressState,
+        addressStreet,
+        avatar,
+        cellphoneNumber,
+        email,
+        phoneNumber
+      },
+      userId
+    );
 
     return response.status(201).send();
   }
