@@ -8,8 +8,8 @@ export class ListCategoryUseCase {
     private categoryRepository: ICategoryRepository
   ) {}
 
-  async execute() {
-    const categories = await this.categoryRepository.listAll();
+  async execute(search?: string) {
+    const categories = await this.categoryRepository.listAll(search);
 
     return categories;
   }

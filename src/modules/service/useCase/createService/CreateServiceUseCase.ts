@@ -17,7 +17,6 @@ export class CreateServiceUseCase {
     price,
     responsible: userResponsible,
     status,
-    clientId,
     vehicleId
   }: ICreateService) {
     const findCarById = await this.serviceRepository.findByCarId(vehicleId);
@@ -35,7 +34,6 @@ export class CreateServiceUseCase {
       price,
       responsible: userResponsible,
       status: status ? status : "pending",
-      clientId,
       vehicleId
     });
 

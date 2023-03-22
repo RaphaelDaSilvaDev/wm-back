@@ -8,6 +8,6 @@ export interface ICreateService {
   price: number;
   status: string;
   responsible: string;
-  clientId: string;
+  clientId?: string;
   vehicleId: string;
 }
