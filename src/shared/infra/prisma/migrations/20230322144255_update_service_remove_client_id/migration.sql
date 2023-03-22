@@ -1,0 +1,8 @@
+-- DropForeignKey
+ALTER TABLE "Service" DROP CONSTRAINT "Service_clientId_fkey";
+
+-- AlterTable
+ALTER TABLE "Service" ALTER COLUMN "clientId" DROP NOT NULL;
+
+-- AddForeignKey
+ALTER TABLE "Service" ADD CONSTRAINT "Service_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "Client"("id") ON DELETE SET NULL ON UPDATE CASCADE;

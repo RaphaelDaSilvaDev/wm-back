@@ -9,7 +9,7 @@ export class Service {
   price!: number;
   status!: string;
   responsible!: string;
-  clientId!: string;
+  clientId!: string | null;
   vehicleId!: string;
   createdAt!: Date;
   updatedAt!: Date;

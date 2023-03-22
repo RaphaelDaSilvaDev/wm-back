@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { ListVehicleByIdUseCase } from "../listVehicleById/ListVehicleByIdUseCase";
+import { ListVehicleByClientUseCase } from "./ListVehicleByClientUseCase";
 
 export class ListVehicleByClientController {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
 
-    const listVehicleByCIdUseCase = container.resolve(ListVehicleByIdUseCase);
+    const listVehicleByCIdUseCase = container.resolve(ListVehicleByClientUseCase);
 
     const vehicles = await listVehicleByCIdUseCase.execute(id);
 

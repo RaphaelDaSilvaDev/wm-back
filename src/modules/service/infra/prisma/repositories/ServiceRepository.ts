@@ -17,7 +17,6 @@ export class ServiceRepository implements IServiceRepository {
     price,
     status,
     responsible,
-    clientId,
     vehicleId
   }: ICreateService): Promise<Service> {
     const service = await prismaClient.service.create({
@@ -28,7 +27,6 @@ export class ServiceRepository implements IServiceRepository {
         price,
         status,
         responsible,
-        clientId,
         vehicleId
       }
     });
@@ -39,7 +37,7 @@ export class ServiceRepository implements IServiceRepository {
   async findServiceById(id: string): Promise<Service | null> {
     const service = await prismaClient.service.findUnique({
       where: { id },
-      include: { user: true, client: true, serviceProducts: true, vehicle: true }
+      include: { user: true, client: true, serviceProducts: true, vehicle: { include: { Client: true } } }
     });
     return service;
   }
@@ -71,7 +69,7 @@ export class ServiceRepository implements IServiceRepository {
       ? "denied"
       : search;
     const services = await prismaClient.service.findMany({
-      include: { user: true, client: true, serviceProducts: true, vehicle: true },
+      include: { user: true, client: true, serviceProducts: true, vehicle: { include: { Client: true } } },
       where: {
         OR: [
           {
