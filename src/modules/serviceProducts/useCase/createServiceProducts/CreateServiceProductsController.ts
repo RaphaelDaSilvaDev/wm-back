@@ -4,11 +4,11 @@ import { CreateServiceProductsUseCase } from "./CreateServiceProductsUseCase";
 
 export class CreateServiceProductsController {
   async handle(request: Request, response: Response) {
-    const { serviceId, quantity, productId } = request.body;
+    const { products } = request.body;
 
     const createServiceProductsUseCase = container.resolve(CreateServiceProductsUseCase);
 
-    const serviceProduct = await createServiceProductsUseCase.execute({ productId, quantity, serviceId });
+    const serviceProduct = await createServiceProductsUseCase.execute(products);
 
     return response.json(serviceProduct);
   }
