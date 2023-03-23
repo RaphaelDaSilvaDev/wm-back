@@ -10,7 +10,10 @@ export class ListProductsUseCase {
 
   async execute(search?: string) {
     const products = await this.productRepository.listAll(search);
+    const productsWithAmount = products.map((item) => {
+      return { ...item, amount: null };
+    });
 
-    return products;
+    return productsWithAmount;
   }
 }

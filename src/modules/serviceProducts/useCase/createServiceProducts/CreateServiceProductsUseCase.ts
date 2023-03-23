@@ -9,8 +9,11 @@ export class CreateServiceProductsUseCase {
     private serviceProductsRepository: IServiceProductsRepository
   ) {}
 
-  async execute(date: ICreateServiceProducts) {
-    const serviceProducts = await this.serviceProductsRepository.create(date);
+  async execute(products: ICreateServiceProducts[]) {
+    const serviceProducts = products.map(async (item) => {
+      await this.serviceProductsRepository.remove(item.serviceId);
+      await this.serviceProductsRepository.create(item);
+    });
 
     return serviceProducts;
   }

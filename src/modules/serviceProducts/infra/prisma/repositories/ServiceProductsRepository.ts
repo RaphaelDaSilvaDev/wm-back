@@ -19,4 +19,8 @@ export class ServiceProductsRepository implements IServiceProductsRepository {
     });
     return serviceProduct;
   }
+
+  async remove(id: string): Promise<void> {
+    await prismaClient.serviceProducts.deleteMany({ where: { serviceId: id } });
+  }
 }
