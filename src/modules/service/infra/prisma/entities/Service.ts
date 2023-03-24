@@ -7,6 +7,8 @@ export class Service {
   responsible_observation!: string | null;
   delivery!: Date;
   price!: number;
+  discountValue!: number | null;
+  discountPercentage!: number | null;
   status!: string;
   responsible!: string;
   clientId!: string | null;

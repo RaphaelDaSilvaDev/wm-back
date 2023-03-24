@@ -5,8 +5,16 @@ import { CreateServiceUseCase } from "./CreateServiceUseCase";
 export class CreateServiceController {
   async handle(request: Request, response: Response) {
     const { id } = request.user;
-    const { client_observation, responsible_observation, delivery, price, status, responsible, vehicleId } =
-      request.body;
+    const {
+      client_observation,
+      responsible_observation,
+      delivery,
+      discountValue,
+      discountPercentage,
+      status,
+      responsible,
+      vehicleId
+    } = request.body;
 
     const createServiceUseCase = container.resolve(CreateServiceUseCase);
 
@@ -16,7 +24,8 @@ export class CreateServiceController {
       client_observation,
       responsible_observation,
       delivery,
-      price,
+      discountValue,
+      discountPercentage,
       responsible: userResponsible,
       status,
       vehicleId
