@@ -14,7 +14,8 @@ export class CreateServiceUseCase {
     client_observation,
     responsible_observation,
     delivery,
-    price,
+    discountValue,
+    discountPercentage,
     responsible: userResponsible,
     status,
     vehicleId
@@ -31,7 +32,8 @@ export class CreateServiceUseCase {
       client_observation,
       responsible_observation,
       delivery,
-      price,
+      discountValue,
+      discountPercentage,
       responsible: userResponsible,
       status: status ? status : "pending",
       vehicleId

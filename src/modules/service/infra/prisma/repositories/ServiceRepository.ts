@@ -14,7 +14,8 @@ export class ServiceRepository implements IServiceRepository {
     client_observation,
     responsible_observation,
     delivery,
-    price,
+    discountValue,
+    discountPercentage,
     status,
     responsible,
     vehicleId
@@ -24,7 +25,9 @@ export class ServiceRepository implements IServiceRepository {
         client_observation,
         responsible_observation,
         delivery,
-        price,
+        discountValue,
+        discountPercentage,
+        price: 0,
         status,
         responsible,
         vehicleId
@@ -46,13 +49,23 @@ export class ServiceRepository implements IServiceRepository {
     delivery,
     id,
     price,
+    discountPercentage,
+    discountValue,
     responsible,
     responsible_observation,
     status
   }: IEditService): Promise<Service> {
     const service = await prismaClient.service.update({
       where: { id },
-      data: { delivery, price, responsible, responsible_observation, status }
+      data: {
+        delivery,
+        price,
+        discountPercentage,
+        discountValue,
+        responsible,
+        responsible_observation,
+        status
+      }
     });
 
     return service;

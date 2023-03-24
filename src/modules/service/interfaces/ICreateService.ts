@@ -5,7 +5,9 @@ export interface ICreateService {
   client_observation: string;
   responsible_observation: string;
   delivery: Date;
-  price: number;
+  price?: number;
+  discountValue?: number;
+  discountPercentage?: number;
   status: string;
   responsible: string;
   clientId?: string;

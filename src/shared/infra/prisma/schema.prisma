@@ -38,6 +38,8 @@ model Service {
   responsible_observation String?
   delivery                DateTime
   price                   Float
+  discountValue           Float?
+  discountPercentage      Float?
   status                  String
   user                    User              @relation(fields: [responsible], references: [id])
   responsible             String

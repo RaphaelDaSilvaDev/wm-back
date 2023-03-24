@@ -10,7 +10,16 @@ export class EditServiceUseCase {
     private serviceRepository: IServiceRepository
   ) {}
 
-  async execute({ delivery, responsible_observation, price, responsible, id, status }: IEditService) {
+  async execute({
+    delivery,
+    responsible_observation,
+    price,
+    discountValue,
+    discountPercentage,
+    responsible,
+    id,
+    status
+  }: IEditService) {
     if (id) {
       const service = await this.serviceRepository.findServiceById(id);
 
@@ -23,6 +32,8 @@ export class EditServiceUseCase {
       if (price) service.price = price;
       if (responsible) service.responsible = responsible;
       if (status) service.status = status;
+      service.discountPercentage = discountPercentage || 0;
+      service.discountValue = discountValue || 0;
 
       const updateService = await this.serviceRepository.editService(service);
 

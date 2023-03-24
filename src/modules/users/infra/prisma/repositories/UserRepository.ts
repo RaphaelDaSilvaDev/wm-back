@@ -91,7 +91,7 @@ export class UserRepository implements IUserRepository {
 
   async listAll(search?: string): Promise<User[]> {
     const users = await prismaClient.user.findMany({
-      orderBy: { status: "desc" },
+      orderBy: { permission: "asc" },
       where: {
         OR: [
           { name: { contains: search ? search : "", mode: "insensitive" } },
