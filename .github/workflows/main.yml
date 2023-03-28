@@ -26,7 +26,7 @@ jobs:
         run: yarn build
         
       - name: Prisma Migration
-        run: yarn prisma:migration
+        run: npx prisma migrate deploy --schema=./src/shared/infra/prisma/schema.prisma
         
       - uses: appleboy/scp-action@master
         with:
