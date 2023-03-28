@@ -33,13 +33,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           source: "., !node_modules, !ormconfig.json, !docker-compose.yml"
           target: "~/app/wm-api"
- 
- 
-      - name: 'Create env file'
-        run: |
-          touch .env
-          echo DATABASE_URL=${{ secrets.TEST_CLIENT }} >> .env
-          cat .env
           
       - name: Update API
         uses: appleboy/ssh-action@v0.1.7
