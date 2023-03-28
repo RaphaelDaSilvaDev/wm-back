@@ -35,13 +35,11 @@ jobs:
           target: "~/app/wm-api"
  
  
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_DEBUG: false
-          envkey_SOME_API_KEY: "DATABASE_URL"
-          envkey_SECRET_KEY: ${{ secrets.TEST_CLIENT }}
-          file_name: .env
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo DATABASE_URL=${{ secrets.TEST_CLIENT }} >> .env
+          cat .env
           
       - name: Update API
         uses: appleboy/ssh-action@v0.1.7
