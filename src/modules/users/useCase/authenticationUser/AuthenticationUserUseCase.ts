@@ -36,7 +36,7 @@ export class AuthenticationUserUseCase {
       throw new AppError("Username or Password incorrect!");
     }
 
-    if (user.status !== "active") {
+    if (user.status !== "access") {
       throw new AppError("Username or Password incorrect!");
     }
 

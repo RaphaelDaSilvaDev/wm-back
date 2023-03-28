@@ -17,7 +17,7 @@ async function CreateMaster() {
       username: "master",
       avatar: null,
       createdAt: new Date(),
-      status: "active",
+      status: "access",
       updatedAt: new Date()
     }
   });
