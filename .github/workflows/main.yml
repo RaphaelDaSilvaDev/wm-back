@@ -25,9 +25,6 @@ jobs:
       - name: Build
         run: yarn build
         
-      - name: Prisma Migration
-        run: npx prisma migrate deploy --schema=./src/shared/infra/prisma/schema.prisma
-        
       - uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -47,4 +44,5 @@ jobs:
           script: |
             cd ~/app/wm-api
             yarn
+            npx prisma migrate deploy --schema=./src/shared/infra/prisma/schema.prisma
             pm2 restart wm-api
