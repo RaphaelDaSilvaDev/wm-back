@@ -24,7 +24,7 @@ model User {
   permission      String
   avatar          String?
   password        String
-  status          String    @default("inactive")
+  status          String    @default("active")
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt()
   Service         Service[]
