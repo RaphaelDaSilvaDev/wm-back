@@ -44,5 +44,5 @@ jobs:
           script: |
             cd ~/app/wm-api
             yarn
-            yarn prisma:migration
+            npx prisma migrate
             pm2 restart wm-api
