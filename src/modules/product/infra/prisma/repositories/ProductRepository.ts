@@ -45,7 +45,8 @@ export class ProductRepository implements IProductRepository {
             category: { name: { contains: search, mode: "insensitive" } }
           }
         ]
-      }
+      },
+      orderBy: { createdAt: "desc" }
     });
     return products;
   }

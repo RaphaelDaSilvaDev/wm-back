@@ -44,7 +44,8 @@ export class vehicleRepository implements IVehicleRepository {
             Client: { name: { contains: search ? search : "", mode: "insensitive" } }
           }
         ]
-      }
+      },
+      orderBy: { createdAt: "desc" }
     });
     return vehicles;
   }
