@@ -21,7 +21,8 @@ export class UpdateUserUseCase {
       avatar,
       cellphoneNumber,
       email,
-      phoneNumber
+      phoneNumber,
+      password
     }: IUpdateUser,
     id: string
   ) {
@@ -38,12 +39,12 @@ export class UpdateUserUseCase {
     if (username) {
       user.username = username;
     }
-
+*/
     if (password) {
       const passwordEncrypted = await hash(password, 8);
 
       user.password = passwordEncrypted;
-    } */
+    }
 
     if (addressCity) user.addressCity = addressCity;
     if (addressDistrict) user.addressDistrict = addressDistrict;

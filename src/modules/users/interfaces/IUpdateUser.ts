@@ -8,4 +8,5 @@ export interface IUpdateUser {
   addressStreet?: string | null;
   addressNumber?: string | null;
   avatar?: string | null;
+  password?: string;
 }
