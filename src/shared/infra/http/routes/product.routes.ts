@@ -7,12 +7,14 @@ import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 import multer from "multer";
 import upload from "../../../../config/upload";
 import { UploadProductController } from "../../../../modules/product/useCase/uploadProducts/UploadProductsController";
+import { AlterQuantityProductController } from "../../../../modules/product/useCase/alterQuantityProduct/AlterQuantityProductController";
 
 const createProductController = new CreateProductController();
 const listProductsController = new ListProductsController();
 const getProductByIdController = new GetProductByIdController();
 const editProductController = new EditProductController();
 const uploadProductsController = new UploadProductController();
+const alterQuantityProductController = new AlterQuantityProductController();
 
 const productRoute = Router();
 
@@ -28,5 +30,6 @@ productRoute.post(
   productUpload.single("file"),
   uploadProductsController.handle
 );
+productRoute.patch("/alter-quantity/:id", ensureAuthenticated, alterQuantityProductController.handle);
 
 export { productRoute };
