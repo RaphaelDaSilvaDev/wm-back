@@ -14,7 +14,8 @@ export class UpdateUserController {
       avatar,
       cellphoneNumber,
       email,
-      phoneNumber
+      phoneNumber,
+      password
     } = request.body;
 
     const updateUserUseCase = container.resolve(UpdateUserUseCase);
@@ -29,7 +30,8 @@ export class UpdateUserController {
         avatar,
         cellphoneNumber,
         email,
-        phoneNumber
+        phoneNumber,
+        password
       },
       userId
     );

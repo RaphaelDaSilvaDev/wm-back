@@ -4,7 +4,7 @@ import prismaClient from "../prismaClient";
 
 async function CreateMaster() {
   const id = uuidV4();
-  const encryptedPassword = await hash("1234", 8);
+  const encryptedPassword = await hash("wmmaster", 8);
 
   await prismaClient.user.upsert({
     where: { id },
