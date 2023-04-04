@@ -21,7 +21,8 @@ export class CategoryRepository implements ICategoryRepository {
   }
   async listAll(search?: string): Promise<Category[]> {
     const categories = await prismaClient.category.findMany({
-      where: { name: { contains: search ? search : "", mode: "insensitive" } }
+      where: { name: { contains: search ? search : "", mode: "insensitive" } },
+      orderBy: { createdAt: "desc" }
     });
     return categories;
   }

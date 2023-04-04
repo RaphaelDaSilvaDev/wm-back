@@ -110,7 +110,8 @@ export class ServiceRepository implements IServiceRepository {
           },
           { user: { name: { contains: search, mode: "insensitive" } } }
         ]
-      }
+      },
+      orderBy: { delivery: "asc" }
     });
     return services;
   }

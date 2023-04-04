@@ -57,7 +57,8 @@ export class ClientRepository implements IClientRepository {
                   phoneNumber: { contains: search, mode: "insensitive" }
                 }
               ]
-            }
+            },
+            orderBy: { createdAt: "desc" }
           }
         : undefined
     );
