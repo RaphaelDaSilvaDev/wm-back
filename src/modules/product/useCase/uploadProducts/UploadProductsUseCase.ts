@@ -36,15 +36,15 @@ export class UploadProductsUseCase {
             categoryId
           ] = line;
           products.push({
-            barCode,
-            name,
-            brand,
-            quantity: Number(quantity),
-            minQuantity: Number(minQuantity),
-            valueToBuy: Number(valueToBuy),
-            valueToSell: Number(valueToBuy),
-            description,
-            categoryId
+            barCode: barCode.trim(),
+            name: name.trim(),
+            brand: brand.trim(),
+            quantity: Number(quantity.trim()),
+            minQuantity: Number(minQuantity.trim()),
+            valueToBuy: Number(valueToBuy.trim()),
+            valueToSell: Number(valueToSell.trim()),
+            description: description.trim(),
+            categoryId: categoryId.trim()
           });
         })
         .on("end", () => {
