@@ -29,7 +29,7 @@ export class EditServiceUseCase {
 
       if (delivery) service.delivery = delivery;
       if (responsible_observation) service.responsible_observation = responsible_observation;
-      if (price) service.price = price;
+      if (price || price === 0) service.price = price;
       if (responsible) service.responsible = responsible;
       if (status) service.status = status;
       service.discountPercentage = discountPercentage || 0;

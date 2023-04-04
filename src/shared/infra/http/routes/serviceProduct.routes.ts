@@ -8,7 +8,7 @@ const listServiceProductsController = new ListServiceProductsController();
 
 const serviceProducts = Router();
 
-serviceProducts.post("/", ensureAuthenticated, createServiceProductsController.handle);
+serviceProducts.post("/:id", ensureAuthenticated, createServiceProductsController.handle);
 serviceProducts.get("/:id", ensureAuthenticated, listServiceProductsController.handle);
 
 export { serviceProducts };
