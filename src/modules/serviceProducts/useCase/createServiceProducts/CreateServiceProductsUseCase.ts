@@ -9,12 +9,15 @@ export class CreateServiceProductsUseCase {
     private serviceProductsRepository: IServiceProductsRepository
   ) {}
 
-  async execute(products: ICreateServiceProducts[]) {
-    const serviceProducts = products.map(async (item) => {
-      await this.serviceProductsRepository.remove(item.serviceId);
-      await this.serviceProductsRepository.create(item);
-    });
-
-    return serviceProducts;
+  async execute(products: ICreateServiceProducts[], serviceId: string) {
+    if (products.length !== 0) {
+      const serviceProducts = products.map(async (item) => {
+        await this.serviceProductsRepository.remove(item.serviceId);
+        await this.serviceProductsRepository.create(item);
+      });
+      return serviceProducts;
+    } else {
+      await this.serviceProductsRepository.remove(serviceId);
+    }
   }
 }
