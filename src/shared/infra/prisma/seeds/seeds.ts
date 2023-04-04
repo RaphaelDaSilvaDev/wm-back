@@ -1,6 +1,6 @@
 import { hash } from "bcrypt";
 import { v4 as uuidV4 } from "uuid";
-import prismaClient from "../prismaClient";
+import { prismaClient } from "../../http/server";
 
 async function CreateMaster() {
   const id = uuidV4();
